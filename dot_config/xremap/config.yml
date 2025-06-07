@@ -1,0 +1,11 @@
+modmap:
+  - name: caps-lock to ctrl
+    remap:
+      CapsLock: CONTROL_L
+  - name: "dual role super (switch fcitx5/super)"
+    remap:
+      Super_L:
+        alone:
+          - KEY_HIRAGANA
+        held:
+          - Super_L

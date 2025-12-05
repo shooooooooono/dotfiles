@@ -7,7 +7,7 @@ return {
       relculright = true,
       segments = {
         {
-          sign = { namespace = { "diagnostic/signs" }, maxwidth = 1, auto = false },
+          sign = { namespace = { "diagnostic" }, maxwidth = 1, auto = false },
           click = "v:lua.ScSa"
         },
         {

@@ -1,52 +1,39 @@
 return {
-  { "folke/tokyonight.nvim" },
-  { "EdenEast/nightfox.nvim" },
-  { "nyoom-engineering/nyoom.nvim" },
-  { "nyoom-engineering/oxocarbon.nvim" },
-  { "bluz71/vim-nightfly-colors" },
-  { "bluz71/vim-moonfly-colors" },
-  { "savq/melange-nvim" },
-  { "AlexvZyl/nordic.nvim" },
-  { "savq/melange-nvim" },
-  {
-    "mcchrish/zenbones.nvim",
-    dependencies = { "rktjmp/lush.nvim" },
-  },
+  -- 使用中のカラースキームのみ即時読み込み
   {
     "rebelot/kanagawa.nvim",
     lazy = false,
+    priority = 1000,
     config = function()
-      -- Default options:
       require('kanagawa').setup({
-        compile = false,  -- enable compiling the colorscheme
-        undercurl = true, -- enable undercurls
+        compile = true,   -- コンパイルを有効化して高速化
+        undercurl = true,
         commentStyle = { italic = true },
         functionStyle = {},
         keywordStyle = { italic = true },
         statementStyle = { bold = true },
         typeStyle = {},
-        transparent = false,   -- do not set background color
-        dimInactive = false,   -- dim inactive window `:h hl-NormalNC`
-        terminalColors = true, -- define vim.g.terminal_color_{0,17}
-        theme = "wave",        -- Load "wave" theme when 'background' option is not set
-        background = {         -- map the value of 'background' option to a theme
-          dark = "dragon",     -- try "dragon" !
-          -- light = "lotus"
+        transparent = false,
+        dimInactive = false,
+        terminalColors = true,
+        theme = "wave",
+        background = {
+          dark = "dragon",
         },
       })
       vim.cmd("colorscheme kanagawa")
     end,
   },
-
-  {
-    "craftzdog/solarized-osaka.nvim",
-    lazy = false,
-    priority = 1000,
-    opts = {},
-  },
-  {
-    "catppuccin/nvim",
-    name = "catppuccin",
-    priority = 1000
-  }
+  -- 以下は必要な時だけ読み込む
+  { "folke/tokyonight.nvim", lazy = true },
+  { "EdenEast/nightfox.nvim", lazy = true },
+  { "nyoom-engineering/nyoom.nvim", lazy = true },
+  { "nyoom-engineering/oxocarbon.nvim", lazy = true },
+  { "bluz71/vim-nightfly-colors", lazy = true },
+  { "bluz71/vim-moonfly-colors", lazy = true },
+  { "savq/melange-nvim", lazy = true },
+  { "AlexvZyl/nordic.nvim", lazy = true },
+  { "mcchrish/zenbones.nvim", lazy = true, dependencies = { "rktjmp/lush.nvim" } },
+  { "craftzdog/solarized-osaka.nvim", lazy = true },
+  { "catppuccin/nvim", name = "catppuccin", lazy = true },
 }

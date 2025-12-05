@@ -43,7 +43,7 @@ local plugins = {
   -----------------------------------------------------------
   -- debugger & dap
   -----------------------------------------------------------
-  { import = "plugins.dap" },
+  { import = "plugins.dap.dap" },
 }
 
 require("lazy").setup(plugins, {})

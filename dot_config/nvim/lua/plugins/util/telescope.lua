@@ -1,6 +1,5 @@
 return {
   "nvim-telescope/telescope.nvim",
-  event = "VeryLazy",
   dependencies = {
     "nvim-lua/plenary.nvim",
     "folke/noice.nvim",
@@ -30,11 +29,10 @@ return {
     ts.load_extension('dap')
   end,
   keys = {
-    { "<leader>ff", "<cmd>Telescope find_files<cr>",    desc = "Find Files" },
-    { "<leader>fw", "<cmd>Telescope live_grep<cr>",     desc = "Live Grep" },
-    { "<leader>fo", "<cmd>Telescope oldfiles<cr>",      desc = "Old Files" },
-    { "<leader>fb", "<cmd>Telescope buffers<cr>",       desc = "Buffers" },
-    { "<leader>gb", "<cmd>Telescope git_branches<cr>",  desc = "Git Branches" },
-    { "<leader>gd", "<cmd>Telescope lsp_reference<cr>", desc = "LSP References" },
+    { "<leader>ff", "<cmd>Telescope find_files<cr>",   desc = "Find Files" },
+    { "<leader>fw", "<cmd>Telescope live_grep<cr>",    desc = "Live Grep" },
+    { "<leader>fo", "<cmd>Telescope oldfiles<cr>",     desc = "Old Files" },
+    { "<leader>fb", "<cmd>Telescope buffers<cr>",      desc = "Buffers" },
+    { "<leader>gb", "<cmd>Telescope git_branches<cr>", desc = "Git Branches" },
   }
 }

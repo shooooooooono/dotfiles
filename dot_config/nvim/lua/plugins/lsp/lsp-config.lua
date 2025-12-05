@@ -2,12 +2,33 @@ return {
   "neovim/nvim-lspconfig",
   event = { "BufReadPre", "BufNewFile" },
   config = function()
-    -- lsp server configurations
-    require("plugins.lsp.servers.gopls").setup()
-    require("plugins.lsp.servers.lua_ls").setup()
+    -- 手動管理: gopls (asdf), rust_analyzer (rustup), clangd (dnf)
+    require("plugins.lsp.servers.gopls")
+    require("plugins.lsp.servers.rust_analyzer")
+    require("plugins.lsp.servers.clangd")
 
+    -- mason で管理する LSP
+    require("plugins.lsp.servers.lua_ls")
+
+    -- Enable LSP servers
+    vim.lsp.enable({ 'gopls', 'lua_ls', 'clangd', 'rust_analyzer' })
   end,
   dependencies = {
+    {
+      "williamboman/mason.nvim",
+      cmd = "Mason",
+      config = function()
+        require("mason").setup()
+      end,
+    },
+    {
+      "williamboman/mason-lspconfig.nvim",
+      config = function()
+        require("mason-lspconfig").setup({
+          ensure_installed = { "lua_ls" },
+        })
+      end,
+    },
     { "hrsh7th/cmp-nvim-lsp" },
     {
       "hrsh7th/nvim-cmp",
@@ -72,6 +93,9 @@ return {
       config = function()
         require("actions-preview").setup()
       end,
+      keys = {
+        { "<leader>ca", function() require("actions-preview").code_actions() end, desc = "Code Actions" },
+      },
     },
   }
 }

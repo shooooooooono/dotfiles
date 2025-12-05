@@ -2,7 +2,7 @@ return {
   {
     "NeogitOrg/neogit",
     dependencies = "nvim-lua/plenary.nvim",
-    event = "VeryLazy",
+    cmd = "Neogit",
     config = function()
       local neogit = require("neogit")
       neogit.setup({
@@ -19,11 +19,15 @@ return {
     config = function()
       require("gitsigns").setup()
     end,
+    keys = {
+      { "[g", "<cmd>Gitsigns prev_hunk<cr>", desc = "Prev Hunk" },
+      { "]g", "<cmd>Gitsigns next_hunk<cr>", desc = "Next Hunk" },
+    },
   },
 
   {
     "sindrets/diffview.nvim",
-    event = "VeryLazy",
+    cmd = { "DiffviewOpen", "DiffviewFileHistory" },
     config = function()
       require("diffview").setup()
     end,
@@ -31,7 +35,7 @@ return {
 
   {
     'pwntester/octo.nvim',
-    event = "VeryLazy",
+    cmd = "Octo",
     dependencies = {
       'nvim-lua/plenary.nvim',
       'nvim-telescope/telescope.nvim',

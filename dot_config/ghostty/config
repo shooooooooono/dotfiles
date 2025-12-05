@@ -1,0 +1,13 @@
+# Ghostty configuration
+# https://ghostty.org/docs/config
+
+# Font
+font-family = "FiraCode Nerd Font Mono"
+font-feature = calt on, liga on, dlig off
+font-shaping-break = no-cursor
+
+# Shell
+shell-integration = zsh
+
+# Keybindings
+keybind = shift+enter=text:\x1b\r

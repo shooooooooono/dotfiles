@@ -1,4 +1,13 @@
 # =================================================
+#                  tmux auto-start
+# =================================================
+
+# Auto-start tmux if not already in a tmux session
+if command -v tmux &> /dev/null && [ -z "$TMUX" ]; then
+  tmux attach || tmux new
+fi
+
+# =================================================
 #                     prompt
 # =================================================
 
@@ -26,19 +35,17 @@ setopt EXTENDED_HISTORY
 # git checkout
 gcb() {
   local branches branch
-    branches=$(git --no-pager branch -vv) &&
-    branch=$(echo "$branches" | fzf +m) &&
-    git checkout $(echo "$branch" | awk '{print $1}' | sed "s/.* //")
+  branches=$(git --no-pager branch -vv) &&
+  branch=$(echo "$branches" | fzf +m) &&
+  git checkout $(echo "$branch" | awk '{print $1}')
 }
 
 # kill process
 pskill() {
   local pid
-    pid=$(ps -ef | sed 1d | fzf -m | awk '{print $2}')
-
-    if [ "x$pid" != "x" ]
-      then
-        echo $pid | xargs kill -${1:-9}
+  pid=$(ps -ef | sed 1d | fzf -m | awk '{print $2}')
+  if [ -n "$pid" ]; then
+    echo $pid | xargs kill -${1:-9}
   fi
 }
 
@@ -51,7 +58,11 @@ his() {
 #                      alias
 # =================================================
 
+{{- if eq .chezmoi.os "darwin" }}
 alias ls='ls -G'
+{{- else }}
+alias ls='ls --color=auto'
+{{- end }}
 alias ghf='cd `ghq list -p | fzf`'
 
 
@@ -59,8 +70,19 @@ alias ghf='cd `ghq list -p | fzf`'
 #                     manager
 # =================================================
 
+export PATH="$HOME/.local/bin:$PATH"
+
 # asdf
-. $(brew --prefix asdf)/libexec/asdf.sh
+{{- if eq .chezmoi.os "darwin" }}
+[ -f "$(brew --prefix asdf)/libexec/asdf.sh" ] && . "$(brew --prefix asdf)/libexec/asdf.sh"
+{{- else }}
+[ -d "${ASDF_DATA_DIR:-$HOME/.asdf}" ] && export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
+{{- end }}
+
+# append completions to fpath
+fpath=(${ASDF_DATA_DIR:-$HOME/.asdf}/completions $fpath)
+# initialise completions with ZSH's compinit
+autoload -Uz compinit && compinit
 
 # sheldon
 eval "$(sheldon source)"

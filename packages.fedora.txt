@@ -1,0 +1,20 @@
+# Dev tools
+asdf
+bat
+btop
+chezmoi
+fd-find
+fzf
+gh
+ghostty
+git
+gitui
+neovim
+starship
+zsh
+
+# Apps
+arduino-cli
+discord
+kicad
+mpv

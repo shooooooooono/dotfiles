@@ -20,6 +20,9 @@ opt.list = true
 opt.listchars:append "eol:↴"
 opt.relativenumber = true
 
+g.mapleader = " "
+
+
 -----------------------------------------------------------
 -- Neovim UI
 -----------------------------------------------------------

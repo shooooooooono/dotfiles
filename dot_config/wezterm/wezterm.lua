@@ -1,32 +1,14 @@
 local wezterm = require 'wezterm'
 local config = {}
 
-config.color_scheme = 'Kanagawa (Gogh)'
-config.window_background_gradient = {
-  colors = { 'black', "#02263d" },
-  orientation = {
-    Radial = {
-      -- Specifies the x coordinate of the center of the circle,
-      -- in the range 0.0 through 1.0.  The default is 0.5 which
-      -- is centered in the X dimension.
-      cx = 0.75,
+--  kanagawa_dragonがリリースになったらこの設定を使う
+-- config.color_scheme = 'Kanagawa Dragon (Gogh)'
 
-      -- Specifies the y coordinate of the center of the circle,
-      -- in the range 0.0 through 1.0.  The default is 0.5 which
-      -- is centered in the Y dimension.
-      cy = 0.75,
+-- colorscheme
+local home = os.getenv("HOME")
+local colors, metadata = wezterm.color.load_terminal_sexy_scheme(home .. "/.config/wezterm/kanagawa_dragon.json")
+config.colors = colors
 
-      -- Specifies the radius of the notional circle.
-      -- The default is 0.5, which combined with the default cx
-      -- and cy values places the circle in the center of the
-      -- window, with the edges touching the window edges.
-      -- Values larger than 1 are possible.
-      radius = 1.25,
-    },
-  },
-}
-config.window_background_opacity = 0.90
-config.macos_window_background_blur = 20
 config.window_decorations = "RESIZE"
 config.show_tabs_in_tab_bar = true
 
@@ -53,8 +35,7 @@ end)
 ------------------------
 local font = wezterm.font_with_fallback {
   {
-    family = 'Monaspace Krypton',
-    -- family = 'JetBrains Mono',
+    family = 'Monaspace Neon',
     harfbuzz_features = { "calt=1", "clig=1", "liga=1", 'ss01', 'ss02', 'ss03', 'ss04', 'ss05', 'ss06', 'ss07', 'ss08', 'ss09'
     }
   },
@@ -64,7 +45,7 @@ local font = wezterm.font_with_fallback {
 config.font = font
 config.font_size = 12
 
-config.use_fancy_tab_bar = true
+-- config.use_fancy_tab_bar = true
 config.enable_scroll_bar = true
 config.automatically_reload_config = true
 
@@ -89,6 +70,7 @@ config.keys = {
   { key = 'J', mods = 'LEADER',       action = wezterm.action.AdjustPaneSize { 'Down', 5 }, },
   { key = 'K', mods = 'LEADER',       action = wezterm.action.AdjustPaneSize { 'Up', 5 } },
   { key = 'L', mods = 'LEADER',       action = wezterm.action.AdjustPaneSize { 'Right', 5 }, },
+  { key = 'L', mods = 'CTRL',         action = wezterm.action.ShowDebugOverlay },
 }
 
 return config

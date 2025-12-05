@@ -1,3 +1,3 @@
--- vim.cmd("colorscheme kanagawa-dragon")
-
-require("kanagawa").load("dragon")
+-- require("kanagawa").setup()
+-- vim.cmd("colorscheme kanagawa")
+-- vim.cmd("colorscheme kanagawa")

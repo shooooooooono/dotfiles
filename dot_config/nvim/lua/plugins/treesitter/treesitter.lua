@@ -8,17 +8,11 @@ return {
   config = function()
     require("nvim-treesitter.configs").setup({
       ensure_installed = {
-        "bash",
-        "c",
-        "cpp",
         "go",
         "json",
         "lua",
         "markdown",
         "markdown_inline",
-        "regex",
-        "rust",
-        "toml",
         "vim",
         "yaml",
         "diff"

@@ -1,10 +1,16 @@
 local M = {}
 
 function M.ExecuteCommand(command)
-    local handle = io.popen(command)
-    local result = handle:read("*a")
-    handle:close()
-    return  string.gsub(result, "\n$", "")
+  if command == nil then
+    return nil, "Command is nil"
+  end
+
+  local result = vim.system(command):wait()
+  if result.code ~= 0 then
+    return nil, "Failed to execute command"
+  end
+
+  return string.gsub(result.stdout, "\n$", "")
 end
 
 return M

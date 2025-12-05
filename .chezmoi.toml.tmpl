@@ -1,0 +1,12 @@
+sourceDir = {{ joinPath .chezmoi.homeDir "ghq/github.com/shooooooooono/dotfiles" | quote }}
+
+[data]
+{{- if eq .chezmoi.os "darwin" }}
+  os = "darwin"
+  is_mac = true
+  is_linux = false
+{{- else if eq .chezmoi.os "linux" }}
+  os = "linux"
+  is_mac = false
+  is_linux = true
+{{- end }}

@@ -1,4 +1,13 @@
 # =================================================
+#                  tmux auto-start
+# =================================================
+
+# Auto-start tmux if not already in a tmux session
+if command -v tmux &> /dev/null && [ -z "$TMUX" ]; then
+  tmux attach || tmux new
+fi
+
+# =================================================
 #                     prompt
 # =================================================
 
@@ -51,7 +60,11 @@ his() {
 #                      alias
 # =================================================
 
+{{- if eq .chezmoi.os "darwin" }}
 alias ls='ls -G'
+{{- else }}
+alias ls='ls --color=auto'
+{{- end }}
 alias ghf='cd `ghq list -p | fzf`'
 
 
@@ -59,8 +72,19 @@ alias ghf='cd `ghq list -p | fzf`'
 #                     manager
 # =================================================
 
+export PATH="$HOME/.local/bin:$PATH"
+
 # asdf
+{{- if eq .chezmoi.os "darwin" }}
 . $(brew --prefix asdf)/libexec/asdf.sh
+{{- else }}
+export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
+{{- end }}
+
+# append completions to fpath
+fpath=(${ASDF_DATA_DIR:-$HOME/.asdf}/completions $fpath)
+# initialise completions with ZSH's compinit
+autoload -Uz compinit && compinit
 
 # sheldon
 eval "$(sheldon source)"

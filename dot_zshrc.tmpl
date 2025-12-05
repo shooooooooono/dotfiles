@@ -63,7 +63,12 @@ alias ls='ls -G'
 {{- else }}
 alias ls='ls --color=auto'
 {{- end }}
-alias ghf='cd `ghq list -p | fzf`'
+# ghq + fzf: select repository and cd
+ghf() {
+  local dir
+  dir=$(ghq list -p | fzf) || return 0
+  [ -n "$dir" ] && cd "$dir"
+}
 
 
 # =================================================

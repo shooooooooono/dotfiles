@@ -4,15 +4,21 @@ return {
   dependencies = {
     "nvim-treesitter/nvim-treesitter-context",
   },
-  run = ":TSUpdate",
+  build = ":TSUpdate",
   config = function()
     require("nvim-treesitter.configs").setup({
       ensure_installed = {
+        "bash",
+        "c",
+        "cpp",
         "go",
         "json",
         "lua",
         "markdown",
         "markdown_inline",
+        "regex",
+        "rust",
+        "toml",
         "vim",
         "yaml",
         "diff"
@@ -20,11 +26,6 @@ return {
       highlight = {
         enable = true,
         additional_vim_regex_highlighting = false,
-      },
-      rainbow = {
-        enable = true,
-        extended_mode = true,
-        max_file_line = 200,
       },
       autotag = {
         enable = true,

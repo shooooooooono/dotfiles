@@ -1,0 +1,21 @@
+modmap:
+  - name: Super tap to IME toggle
+    remap:
+      KEY_LEFTMETA:
+        held: KEY_LEFTMETA
+        alone: KEY_ZENKAKUHANKAKU
+
+keymap:
+  - name: Ctrl+B switch to US for tmux
+    remap:
+      C-b:
+        - launch: ["fcitx5-remote", "-s", "keyboard-us"]
+        - C-b
+
+  - name: Escape switch to US for neovim
+    application:
+      only: ghostty
+    remap:
+      Esc:
+        - launch: ["fcitx5-remote", "-s", "keyboard-us"]
+        - Esc

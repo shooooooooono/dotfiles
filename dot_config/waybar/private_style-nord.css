@@ -1,0 +1,143 @@
+/* Nord風スタイル */
+* {
+    font-family: 'Noto Sans Mono', 'Font Awesome 6 Free', monospace;
+    font-size: 13px;
+}
+
+window#waybar {
+    background-color: #2e3440;
+    color: #eceff4;
+}
+
+#workspaces button {
+    padding: 0 10px;
+    background-color: transparent;
+    color: #d8dee9;
+}
+
+#workspaces button.focused {
+    background-color: #5e81ac;
+    color: #eceff4;
+}
+
+#workspaces button:hover {
+    background-color: #3b4252;
+}
+
+#workspaces button.urgent {
+    background-color: #bf616a;
+}
+
+#clock,
+#battery,
+#cpu,
+#memory,
+#temperature,
+#backlight,
+#network,
+#pulseaudio,
+#tray,
+#mode,
+#idle_inhibitor,
+#scratchpad,
+#power-profiles-daemon,
+#language {
+    padding: 0 12px;
+    color: #eceff4;
+}
+
+#window {
+    color: #d8dee9;
+    margin: 0 8px;
+}
+
+#clock {
+    background-color: #5e81ac;
+}
+
+#battery {
+    background-color: #88c0d0;
+    color: #2e3440;
+}
+
+#battery.charging {
+    background-color: #a3be8c;
+    color: #2e3440;
+}
+
+#battery.critical:not(.charging) {
+    background-color: #bf616a;
+    color: #eceff4;
+}
+
+#cpu {
+    background-color: #81a1c1;
+    color: #2e3440;
+}
+
+#memory {
+    background-color: #b48ead;
+    color: #eceff4;
+}
+
+#temperature {
+    background-color: #d08770;
+    color: #2e3440;
+}
+
+#temperature.critical {
+    background-color: #bf616a;
+    color: #eceff4;
+}
+
+#backlight {
+    background-color: #ebcb8b;
+    color: #2e3440;
+}
+
+#network {
+    background-color: #88c0d0;
+    color: #2e3440;
+}
+
+#network.disconnected {
+    background-color: #bf616a;
+    color: #eceff4;
+}
+
+#pulseaudio {
+    background-color: #ebcb8b;
+    color: #2e3440;
+}
+
+#pulseaudio.muted {
+    background-color: #4c566a;
+    color: #d8dee9;
+}
+
+#tray {
+    background-color: #5e81ac;
+}
+
+#idle_inhibitor {
+    background-color: #4c566a;
+}
+
+#idle_inhibitor.activated {
+    background-color: #ebcb8b;
+    color: #2e3440;
+}
+
+#power-profiles-daemon {
+    background-color: #81a1c1;
+    color: #2e3440;
+}
+
+#language {
+    background-color: #a3be8c;
+    color: #2e3440;
+}
+
+#mode {
+    background-color: #bf616a;
+}

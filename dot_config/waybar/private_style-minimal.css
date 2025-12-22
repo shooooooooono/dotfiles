@@ -1,0 +1,78 @@
+/* ミニマル・モダンスタイル */
+* {
+    font-family: 'Noto Sans Mono', 'Font Awesome 6 Free', monospace;
+    font-size: 13px;
+    border: none;
+}
+
+window#waybar {
+    background-color: #1a1a1a;
+    color: #ffffff;
+}
+
+#workspaces button {
+    padding: 0 8px;
+    background-color: transparent;
+    color: #888888;
+    border-radius: 0;
+}
+
+#workspaces button.focused {
+    color: #ffffff;
+    border-bottom: 2px solid #ffffff;
+}
+
+#workspaces button:hover {
+    color: #cccccc;
+    background-color: #2a2a2a;
+}
+
+#clock,
+#battery,
+#cpu,
+#memory,
+#temperature,
+#backlight,
+#network,
+#pulseaudio,
+#tray,
+#mode,
+#idle_inhibitor,
+#scratchpad,
+#power-profiles-daemon,
+#language {
+    padding: 0 12px;
+    color: #ffffff;
+    background-color: transparent;
+}
+
+#window {
+    color: #888888;
+    font-weight: normal;
+}
+
+/* アクセントカラーは控えめに */
+#battery.charging {
+    color: #4ade80;
+}
+
+#battery.critical:not(.charging) {
+    color: #ef4444;
+    font-weight: bold;
+}
+
+#network.disconnected {
+    color: #ef4444;
+}
+
+#pulseaudio.muted {
+    color: #888888;
+}
+
+#temperature.critical {
+    color: #ef4444;
+}
+
+#idle_inhibitor.activated {
+    color: #fbbf24;
+}

@@ -7,7 +7,9 @@ return {
   },
   config = function()
     require("lspsaga").setup({
-      border_style = "single",
+      ui = {
+        border = "single",
+      },
       symbol_in_winbar = {
         enable = true,
         sign = true,
@@ -27,5 +29,11 @@ return {
     { "<S-k>",      "<cmd>Lspsaga hover_doc<cr>",            desc = "Hover Doc" },
     { "[e",         "<cmd>Lspsaga diagnostic_jump_prev<cr>", desc = "Prev Diagnostic" },
     { "]e",         "<cmd>Lspsaga diagnostic_jump_next<cr>", desc = "Next Diagnostic" },
+    -- Peek
+    { "gpd",        "<cmd>Lspsaga peek_definition<cr>",      desc = "Peek Definition" },
+    { "gpt",        "<cmd>Lspsaga peek_type_definition<cr>", desc = "Peek Type Definition" },
+    -- Goto
+    { "gd",         "<cmd>Lspsaga goto_definition<cr>",      desc = "Goto Definition" },
+    { "gtd",        "<cmd>Lspsaga goto_type_definition<cr>", desc = "Goto Type Definition" },
   },
 }

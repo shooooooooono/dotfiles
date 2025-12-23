@@ -10,8 +10,8 @@ return {
     -- mason で管理する LSP
     require("plugins.lsp.servers.lua_ls")
 
-    -- Enable LSP servers
-    vim.lsp.enable({ 'gopls', 'lua_ls', 'clangd', 'rust_analyzer' })
+    -- Enable LSP servers (copilot は sidekick.nvim が必要)
+    vim.lsp.enable({ 'gopls', 'lua_ls', 'clangd', 'rust_analyzer', 'copilot' })
   end,
   dependencies = {
     {
@@ -29,57 +29,51 @@ return {
         })
       end,
     },
-    { "hrsh7th/cmp-nvim-lsp" },
     {
-      "hrsh7th/nvim-cmp",
-      event = "InsertEnter",
-      config = function()
-        local lspkind = require("lspkind")
-        local cmp = require("cmp")
-
-        lspkind.init({
-          symbol_map = {
-            Copilot = "",
-          }
-        })
-
-        cmp.setup({
-          snippet = {
-            expand = function(args)
-              vim.fn["vsnip#anonymous"](args.body)
-            end,
-          },
-          sources = cmp.config.sources({
-            { name = "nvim_lsp" },
-            { name = "buffer" },
-            { name = "path" },
-            -- { name = 'nvim_lsp_signature_help' },
-            { name = 'copilot' },
-          }),
-          window = {
-            completion = cmp.config.window.bordered(),
-            documentation = cmp.config.window.bordered(),
-          },
-          formatting = {
-            format = lspkind.cmp_format({
-              with_text = true,
-              mode = "symbol_text",
-            }),
-          },
-          mapping = cmp.mapping.preset.insert({
-            ["<C-p>"] = cmp.mapping.select_prev_item(),
-            ["<C-n>"] = cmp.mapping.select_next_item(),
-            ["<CR>"] = cmp.mapping.confirm({ select = true }),
-            ['<C-Space>'] = cmp.mapping.complete(),
-          }),
-        })
-      end,
+      "saghen/blink.cmp",
+      version = "1.*",
       dependencies = {
-        "hrsh7th/cmp-vsnip",
-        "hrsh7th/vim-vsnip",
-        "onsails/lspkind.nvim",
-        "zbirenbaum/copilot-cmp"
-      }
+        "fang2hou/blink-copilot",
+      },
+      opts = {
+        keymap = {
+          preset = "default",
+          ["<C-p>"] = { "select_prev", "fallback" },
+          ["<C-n>"] = { "select_next", "fallback" },
+          ["<CR>"] = { "accept", "fallback" },
+          ["<C-Space>"] = { "show", "fallback" },
+        },
+        appearance = {
+          nerd_font_variant = "mono",
+        },
+        completion = {
+          trigger = {
+            show_on_insert_on_trigger_character = true,
+          },
+          documentation = {
+            auto_show = true,
+            window = { border = "rounded" },
+          },
+          menu = {
+            auto_show = true,
+            border = "rounded",
+            draw = {
+              columns = { { "kind_icon" }, { "label", "label_description", gap = 1 }, { "source_name" } },
+            },
+          },
+        },
+        sources = {
+          default = { "lsp", "copilot", "snippets", "path", "buffer" },
+          providers = {
+            copilot = {
+              name = "copilot",
+              module = "blink-copilot",
+              score_offset = 100,
+              async = true,
+            },
+          },
+        },
+      },
     },
     require("plugins.lsp.lspsaga"),
     {

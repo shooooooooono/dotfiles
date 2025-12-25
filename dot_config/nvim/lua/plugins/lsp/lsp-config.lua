@@ -9,9 +9,10 @@ return {
 
     -- mason で管理する LSP
     require("plugins.lsp.servers.lua_ls")
+    require("plugins.lsp.servers.pyright")
 
     -- Enable LSP servers
-    vim.lsp.enable({ 'gopls', 'lua_ls', 'clangd', 'rust_analyzer' })
+    vim.lsp.enable({ 'gopls', 'lua_ls', 'clangd', 'rust_analyzer', 'pyright' })
   end,
   dependencies = {
     {
@@ -25,7 +26,7 @@ return {
       "williamboman/mason-lspconfig.nvim",
       config = function()
         require("mason-lspconfig").setup({
-          ensure_installed = { "lua_ls" },
+          ensure_installed = { "lua_ls", "pyright" },
         })
       end,
     },

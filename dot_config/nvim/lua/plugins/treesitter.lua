@@ -16,9 +16,11 @@ return {
         "lua",
         "markdown",
         "markdown_inline",
+        "python",
         "regex",
         "rust",
         "toml",
+        "typescript",
         "vim",
         "yaml",
         "diff"

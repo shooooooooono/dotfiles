@@ -27,19 +27,16 @@ map("n", "<C-t>", ":Term<CR>", { noremap = true })
 map("t", "jk", "<C-\\><C-n>")
 
 -----------------------------------------------------------
--- LSP
+-- LSP (gd は lspsaga.lua で設定)
 -----------------------------------------------------------
-map("n", "gd", vim.lsp.buf.definition)
-
 local function format()
   vim.lsp.buf.format({ async = true })
 end
 map("n", "<leader>fm", format)
 
 -----------------------------------------------------------
--- Buffer
+-- Buffer (Tab is handled by sidekick.nvim with bnext fallback)
 -----------------------------------------------------------
-map("n", "<Tab>", ":bnext<CR>")
 map("n", "<S-Tab>", ":bprevious<CR>")
 
 -----------------------------------------------------------

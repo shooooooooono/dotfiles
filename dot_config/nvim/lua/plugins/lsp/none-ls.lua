@@ -8,7 +8,7 @@ return {
       "jay-babu/mason-null-ls.nvim",
       config = function()
         require("mason-null-ls").setup({
-          ensure_installed = { "yamlfmt", "jq" },
+          ensure_installed = { "yamlfmt", "jq", "ruff" },
         })
       end,
     },
@@ -39,10 +39,18 @@ return {
     ------------------------------------------------------------
     local jq = require("none-ls.formatting.jq")
 
+    ------------------------------------------------------------
+    -- Python
+    ------------------------------------------------------------
+    local ruff_format = require("none-ls.formatting.ruff_format")
+    local ruff = require("none-ls.formatting.ruff")
+
     local sources = {
       goimports,
       yamlfmt,
       jq,
+      ruff_format,
+      ruff,
     }
     null_ls.setup({
       sources = sources,

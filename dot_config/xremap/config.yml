@@ -1,3 +1,6 @@
+virtual_modifiers:
+  - F13
+
 modmap:
   - name: caps-lock to ctrl
     remap:
@@ -9,3 +12,28 @@ modmap:
           - KEY_HIRAGANA
         held:
           - Super_L
+  - name: space layer
+    remap:
+      Space:
+        held: F13
+        alone: Space
+        free_hold: true
+
+keymap:
+  - name: Space Layer hjkl
+    remap:
+      F13-h: Left
+      F13-j: Down
+      F13-k: Up
+      F13-l: Right
+  - name: Ctrl shortcuts
+    remap:
+      C-h: BackSpace
+  - name: Right Alt shortcuts
+    remap:
+      Alt_R-h: Minus
+      Alt_R-j: Equal
+      Alt_R-k: LeftBrace
+      Alt_R-l: RightBrace
+      Alt_R-Comma: Shift-9
+      Alt_R-Dot: Shift-0

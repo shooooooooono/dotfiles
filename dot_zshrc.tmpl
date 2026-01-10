@@ -2,8 +2,12 @@
 #                  tmux auto-start
 # =================================================
 
-# Auto-start tmux if not already in a tmux session
-if command -v tmux &> /dev/null && [ -z "$TMUX" ]; then
+# Auto-start tmux if:
+# - tmux is installed
+# - not already in a tmux session
+# - not in WezTerm (uses its own multiplexer)
+# - not via SSH (handled by .ssh/config RemoteCommand)
+if command -v tmux &> /dev/null && [ -z "$TMUX" ] && [ "$TERM_PROGRAM" != "WezTerm" ] && [ -z "$SSH_TTY" ]; then
   tmux attach || tmux new
 fi
 

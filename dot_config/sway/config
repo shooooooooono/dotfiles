@@ -46,11 +46,11 @@ gaps outer 5
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 # Requires: desktop-backgrounds-compat, swaybg, jxl-pixbuf-loader
-output * bg /usr/share/backgrounds/default.jxl fill
+output * bg /home/shono/Pictures/3d-paper-style-curvy-design-layers/3540174.jpg fill
 
 # Monitor positions: 4K (HDMI) left, FHD (DP) right, bottom-aligned
 output HDMI-A-1 position 0 0
-output DP-3 position 3840 1080
+output DP-3 mode 1920x1080@239.757Hz position 3840 1080
 
 # You can get the names of your outputs by running: swaymsg -t get_outputs
 
@@ -127,7 +127,7 @@ input "1133:50504:Logitech_USB_Receiver_Mouse" {
     bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
 
     # Lock screen
-    bindsym $mod+Escape exec swaylock
+    bindsym $mod+Escape exec swaylock -i /home/shono/Pictures/3d-paper-style-curvy-design-layers/3540174.jpg -s fill
 
     # Screenshot (region selection, save to file and copy to clipboard)
     bindsym $mod+Shift+s exec grim -g "$(slurp)" - | tee ~/Pictures/screenshot-$(date +%Y%m%d-%H%M%S).png | wl-copy

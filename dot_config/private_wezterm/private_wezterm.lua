@@ -43,7 +43,7 @@ config.colors = {
 }
 
 -- Terminal type (true color support)
-config.term = "wezterm"
+config.term = "xterm-256color"
 
 -- Background opacity (from ghostty)
 config.window_background_opacity = 0.95

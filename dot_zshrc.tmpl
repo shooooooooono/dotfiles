@@ -12,23 +12,6 @@ if command -v tmux &> /dev/null && [ -z "$TMUX" ] && [ "$TERM_PROGRAM" != "WezTe
 fi
 
 # =================================================
-#                  chezmoi check
-# =================================================
-
-if ! command -v chezmoi &> /dev/null; then
-  echo "⚠ chezmoi: not installed"
-else
-  if [[ -n "$(chezmoi diff 2>/dev/null)" ]]; then
-    echo "⚠ chezmoi: diff detected. Run 'chezmoi apply'"
-  fi
-  _chezmoi_src="$(chezmoi source-path)"
-  _ahead=$(git -C "$_chezmoi_src" rev-list --count origin/main..HEAD 2>/dev/null)
-  _behind=$(git -C "$_chezmoi_src" rev-list --count HEAD..origin/main 2>/dev/null)
-  [[ "$_ahead" -gt 0 ]] && echo "⚠ chezmoi: $_ahead commit(s) to push"
-  [[ "$_behind" -gt 0 ]] && echo "⚠ chezmoi: $_behind commit(s) to pull"
-fi
-
-# =================================================
 #                     prompt
 # =================================================
 
@@ -115,7 +98,7 @@ export PATH="$HOME/.local/bin:$PATH"
 {{- if eq .chezmoi.os "darwin" }}
 [ -f "$(brew --prefix asdf)/libexec/asdf.sh" ] && . "$(brew --prefix asdf)/libexec/asdf.sh"
 {{- else }}
-[ -d "${ASDF_DATA_DIR:-$HOME/.asdf}" ] && export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
+[ -d "${ASDF_DATA_DIR:-$HOME/.asdf}" ] && export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/bin:${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
 {{- end }}
 
 # append completions to fpath
@@ -137,6 +120,23 @@ eval "$(zoxide init zsh --cmd cd)"
 autoload -Uz edit-command-line
 zle -N edit-command-line
 bindkey '^e' edit-command-line
+
+# =================================================
+#                  chezmoi check
+# =================================================
+
+if ! command -v chezmoi &> /dev/null; then
+  echo "⚠ chezmoi: not installed"
+else
+  if [[ -n "$(chezmoi diff 2>/dev/null)" ]]; then
+    echo "⚠ chezmoi: diff detected. Run 'chezmoi apply'"
+  fi
+  _chezmoi_src="$(chezmoi source-path)"
+  _ahead=$(git -C "$_chezmoi_src" rev-list --count origin/main..HEAD 2>/dev/null)
+  _behind=$(git -C "$_chezmoi_src" rev-list --count HEAD..origin/main 2>/dev/null)
+  [[ "$_ahead" -gt 0 ]] && echo "⚠ chezmoi: $_ahead commit(s) to push"
+  [[ "$_behind" -gt 0 ]] && echo "⚠ chezmoi: $_behind commit(s) to pull"
+fi
 
 # =================================================
 #                   custom zshrc

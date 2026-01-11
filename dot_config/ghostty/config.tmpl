@@ -55,6 +55,12 @@ shell-integration = zsh
 
 # Keybindings
 keybind = shift+enter=text:\x1b\r
+# Disable tab creation (using tmux instead)
+{{- if eq .chezmoi.os "darwin" }}
+keybind = super+t=unbind
+{{- else }}
+keybind = ctrl+shift+t=unbind
+{{- end }}
 
 # Background transparency
 background-opacity = 0.95

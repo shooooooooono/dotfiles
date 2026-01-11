@@ -11,3 +11,11 @@ if vim.loop.os_uname().sysname == "Linux" then
     end
   })
 end
+
+-- zsh command line editing (Ctrl+e)
+vim.api.nvim_create_autocmd("BufRead", {
+  pattern = "/tmp/zsh*",
+  callback = function()
+    vim.bo.filetype = "zsh"
+  end,
+})

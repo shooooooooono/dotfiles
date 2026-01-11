@@ -13,7 +13,7 @@ local function get_gopls_cmd()
 end
 
 vim.lsp.config('gopls', {
-  cmd = { get_gopls_cmd(), "-remote=auto" },
+  cmd = { get_gopls_cmd() },
   settings = {
     gopls = {
       analyses = {

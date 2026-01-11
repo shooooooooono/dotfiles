@@ -37,3 +37,13 @@ keymap:
       Alt_R-l: RightBrace
       Alt_R-Comma: Shift-9
       Alt_R-Dot: Shift-0
+  - name: Right Cmd shortcuts (Lofree Flow Lite)
+    device:
+      only: CX 2.4G Wireless Receiver
+    remap:
+      Super_R-h: Minus
+      Super_R-j: Equal
+      Super_R-k: LeftBrace
+      Super_R-l: RightBrace
+      Super_R-Comma: Shift-9
+      Super_R-Dot: Shift-0

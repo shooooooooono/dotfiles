@@ -14,11 +14,11 @@ shell = "zsh"
 
 [plugins]
 
-[plugins.zsh-autocomplete]
-github = "marlonrichert/zsh-autocomplete"
+[plugins.fast-syntax-highlighting]
+github = "zdharma-continuum/fast-syntax-highlighting"
 
 [plugins.zsh-autosuggestions]
 github = "zsh-users/zsh-autosuggestions"
 
-[plugins.fast-syntax-highlighting]
-github = "zdharma-continuum/fast-syntax-highlighting"
+[plugins.zsh-autocomplete]
+github = "marlonrichert/zsh-autocomplete"

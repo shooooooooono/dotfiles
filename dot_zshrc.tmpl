@@ -8,7 +8,24 @@
 # - not in WezTerm (uses its own multiplexer)
 # - not via SSH (handled by .ssh/config RemoteCommand)
 if command -v tmux &> /dev/null && [ -z "$TMUX" ] && [ "$TERM_PROGRAM" != "WezTerm" ] && [ -z "$SSH_TTY" ]; then
-  tmux attach || tmux new
+  tmux attach -t main || tmux new -s main
+fi
+
+# =================================================
+#                  chezmoi check
+# =================================================
+
+if ! command -v chezmoi &> /dev/null; then
+  echo "⚠ chezmoi: not installed"
+else
+  if [[ -n "$(chezmoi diff 2>/dev/null)" ]]; then
+    echo "⚠ chezmoi: diff detected. Run 'chezmoi apply'"
+  fi
+  _chezmoi_src="$(chezmoi source-path)"
+  _ahead=$(git -C "$_chezmoi_src" rev-list --count origin/main..HEAD 2>/dev/null)
+  _behind=$(git -C "$_chezmoi_src" rev-list --count HEAD..origin/main 2>/dev/null)
+  [[ "$_ahead" -gt 0 ]] && echo "⚠ chezmoi: $_ahead commit(s) to push"
+  [[ "$_behind" -gt 0 ]] && echo "⚠ chezmoi: $_behind commit(s) to pull"
 fi
 
 # =================================================
@@ -31,6 +48,10 @@ export SAVEHIST=100000
 
 setopt hist_ignore_dups
 setopt EXTENDED_HISTORY
+
+# vi mode
+bindkey -v
+KEYTIMEOUT=1
 
 # =================================================
 #                    functions
@@ -63,10 +84,19 @@ his() {
 # =================================================
 
 {{- if eq .chezmoi.os "darwin" }}
-alias ls='ls -G'
+alias ls='eza --icons'
 {{- else }}
-alias ls='ls --color=auto'
+alias ls='eza --icons'
 {{- end }}
+alias ll='eza -l --icons --git'
+alias la='eza -la --icons --git'
+alias tree='eza --tree --icons'
+alias cat='bat'
+alias grep='rg'
+alias find='fd'
+alias du='dust'
+alias ps='procs'
+
 # ghq + fzf: select repository and cd
 ghf() {
   local dir
@@ -93,8 +123,20 @@ fpath=(${ASDF_DATA_DIR:-$HOME/.asdf}/completions $fpath)
 # initialise completions with ZSH's compinit
 autoload -Uz compinit && compinit
 
+# zsh-autocomplete settings (before loading)
+zstyle ':autocomplete:*' min-delay 0.5
+zstyle ':autocomplete:*' async yes
+
 # sheldon
 eval "$(sheldon source)"
+
+# zoxide (smart cd)
+eval "$(zoxide init zsh --cmd cd)"
+
+# Edit command line in nvim (Ctrl+e)
+autoload -Uz edit-command-line
+zle -N edit-command-line
+bindkey '^e' edit-command-line
 
 # =================================================
 #                   custom zshrc

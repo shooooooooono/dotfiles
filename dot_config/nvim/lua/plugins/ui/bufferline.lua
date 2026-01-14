@@ -1,7 +1,12 @@
 return {
   "akinsho/nvim-bufferline.lua",
-  event = "VeryLazy",
+  lazy = false,
   config = function()
-    require("bufferline").setup()
+    require("bufferline").setup({
+      options = {
+        mode = "buffers",
+        always_show_bufferline = true,
+      },
+    })
   end,
 }

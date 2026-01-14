@@ -11,8 +11,7 @@ return {
         border = "single",
       },
       symbol_in_winbar = {
-        enable = true,
-        sign = true,
+        enable = false,
       },
       implement = {
         enable = true,

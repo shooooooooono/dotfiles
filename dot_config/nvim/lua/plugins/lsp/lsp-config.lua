@@ -42,6 +42,8 @@ return {
           preset = "default",
           ["<C-p>"] = { "select_prev", "fallback" },
           ["<C-n>"] = { "select_next", "fallback" },
+          ["<Up>"] = { "select_prev", "fallback" },
+          ["<Down>"] = { "select_next", "fallback" },
           ["<CR>"] = { "accept", "fallback" },
           ["<C-Space>"] = { "show", "fallback" },
         },
@@ -78,12 +80,6 @@ return {
       },
     },
     require("plugins.lsp.lspsaga"),
-    {
-      "ray-x/lsp_signature.nvim",
-      config = function()
-        require("lsp_signature").setup()
-      end,
-    },
     {
       "aznhe21/actions-preview.nvim",
       config = function()
